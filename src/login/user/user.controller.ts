@@ -11,4 +11,6 @@ export class UserController {
         logger.setContext(UserController.name)
     }
 
+    // public async login()
+
 }

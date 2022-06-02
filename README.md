@@ -79,7 +79,9 @@ Nest is [MIT licensed](LICENSE).
 使用nest框架结合ts封装node开发常见的功能(mysql,redis,es,rabbitmq等),开箱即用的功能
 
 #### 软件架构
-软件架构说明
+- Service 负责处理逻辑
+- Controller 负责路由
+- Module 负责整合
 
 
 #### 安装教程
