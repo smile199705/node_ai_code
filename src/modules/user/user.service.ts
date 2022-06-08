@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ApiRequest } from '../../utils';
+import { ApiRequest } from '../../utils/axios_http';
 
 @Injectable()
 export class UserService {
