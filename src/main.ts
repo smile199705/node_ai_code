@@ -19,7 +19,7 @@ async function bootstrap() {
 
   // 全局异常捕捉过滤器
   // const logger = app.get(Logger);
-  // app.useGlobalFilters(new HttpExceptionFilter());
+  // app.useGlobalFilters(new HttpExceptionFilter(logger));
   await app.listen(3000);
 }
 bootstrap().then(() => {
