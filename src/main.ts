@@ -1,7 +1,9 @@
 import { NestFactory } from '@nestjs/core';
+import {  } from '@nestjs/common';
 import { AppModule } from './app.module';
-// import { HttpExceptionFilter } from './filters';
-// import { Logger } from 'nestjs-pino';
+import { start_printf } from "./utils/start_printf";
+import { HttpExceptionFilter } from './filters';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   /**
@@ -18,10 +20,11 @@ async function bootstrap() {
   app.setGlobalPrefix('axle');
 
   // 全局异常捕捉过滤器
-  // const logger = app.get(Logger);
-  // app.useGlobalFilters(new HttpExceptionFilter(logger));
+  const logger = app.get(Logger);
+  console.log(logger, '===========')
+  app.useGlobalFilters(new HttpExceptionFilter(logger));
   await app.listen(3000);
 }
 bootstrap().then(() => {
-  console.log('服务启动了');
+  start_printf()
 });
