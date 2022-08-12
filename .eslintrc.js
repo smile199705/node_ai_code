@@ -22,5 +22,312 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
 
+    /**
+     * 禁止将 this 赋值给其他变量,除非是解构赋值.
+     */
+    '@typescript-eslint/no-this-alias': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
+    /**
+     * for-of代替for循环.
+     */
+    '@typescript-eslint/prefer-for-of': 'off',
+    /**
+     * ts每个函数都要显式声明返回值.
+     */
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+
+    "no-invalid-this": 2, //禁止无效的this，只能用在构造器，类，对象字面量
+
+    /**
+     * 关闭 any 的警告.
+     */
+    '@typescript-eslint/no-explicit-any': ['off'],
+
+    /**
+     * 禁止混用tab和空格.
+     */
+    'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+
+    /**
+     * 强制不使用分号.
+     */
+    'semi': ['error', 'never'],
+    '@typescript-eslint/semi':  ['error', 'never'],
+
+    /**
+     * 限制数组类型必须使用 Array<T> 或 T[].
+     * @reason 允许灵活运用两者.
+     */
+    '@typescript-eslint/array-type': 'off',
+
+    /**
+     * 禁止使用 // @ts-ignore // @ts-nocheck // @ts-check.
+     * @reason 这种注释本身就是对特殊代码的说明.
+     */
+    '@typescript-eslint/ban-ts-comment': 'off',
+
+    /**
+     * 禁止使用类似 tslint:disable-next-line 这样的注释.
+     */
+    '@typescript-eslint/ban-tslint-comment': 'off',
+
+    /**
+     * 优先使用 interface 而不是 type.
+     * @reason interface 可以 implement, extend 和 merge.
+     */
+    '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+
+    /**
+     * 必须使用 import type 导入类型.
+     */
+    '@typescript-eslint/consistent-type-imports': 'off',
+
+    /**
+     * 禁止使用 foo['bar']，必须写成 foo.bar.
+     * @reason 当需要写一系列属性的时候，可以更统一.
+     */
+    'dot-notation': 'off',
+    '@typescript-eslint/dot-notation': 'off',
+
+    /**
+     * 函数返回值必须与声明的类型一致.
+     * @reason 编译阶段检查就足够了.
+     */
+    '@typescript-eslint/explicit-function-return-type': 'off',
+
+    /**
+     * 必须设置类的成员的可访问性.
+     * @reason 将不需要公开的成员设为私有的，可以增强代码的可理解性，对文档输出也很友好.
+     */
+    '@typescript-eslint/explicit-member-accessibility': ['error', {
+      accessibility: 'explicit',
+      overrides: {
+        accessors: 'explicit',
+        constructors: 'no-public',
+        methods: 'explicit',
+        properties: 'off',
+        parameterProperties: 'explicit'
+      }
+    }],
+
+    /**
+     * 禁止使用返回值为 void 的函数的返回值.
+     */
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+
+    /**
+     * 禁止重复定义类的成员.
+     * @reason 编译阶段就会报错了.
+     */
+    'no-dupe-class-members': 'off',
+    '@typescript-eslint/no-dupe-class-members': 'off',
+
+    /**
+     * 禁止重复导入模块.
+     */
+    'no-duplicate-imports': 'off',
+    '@typescript-eslint/no-duplicate-imports': 'error',
+
+    /**
+     * 禁止对 array 使用 for in 循环.
+     */
+    '@typescript-eslint/no-for-in-array': 'on',
+
+    /**
+     * 禁止在类之外的地方使用 this.
+     * @reason 只允许在 class 中使用 this.
+     */
+    'no-invalid-this': 'off',
+    '@typescript-eslint/no-invalid-this': 'error',
+
+    /**
+     * 禁止使用无意义的 void 类型.
+     * @reason void 只能用在函数的返回值中.
+     */
+    '@typescript-eslint/no-invalid-void-type': 'error',
+
+    /**
+     * 避免错误的使用 Promise.
+     */
+    '@typescript-eslint/no-misused-promises': 'off',
+
+    /**
+     * 禁止使用 namespace 来定义命名空间.
+     * @reason 使用 es6 引入模块，才是更标准的方式.
+     * 但是允许使用 declare namespace ... {} 来定义外部命名空间.
+     */
+    '@typescript-eslint/no-namespace': [
+      'error',
+      {
+        allowDeclarations: true,
+        allowDefinitionFiles: true,
+      },
+    ],
+
+    /**
+     * 禁止使用 require.
+     * @reason 统一使用 import 来引入模块，特殊情况使用单行注释允许 require 引入.
+     */
+    '@typescript-eslint/no-require-imports': 'error',
+
+    /**
+     * 禁止将 this 赋值给其他变量，除非是解构赋值.
+     */
+    '@typescript-eslint/no-this-alias': [
+      'error',
+      {
+        allowDestructuring: true,
+      },
+    ],
+
+    /**
+     * 禁止 throw 字面量，必须 throw 一个 Error 对象.
+     */
+    'no-throw-literal': 'off',
+    '@typescript-eslint/no-throw-literal': 'off',
+    /**
+     * 禁止将变量或属性的类型设置为 any.
+     */
+    '@typescript-eslint/no-unsafe-assignment': 'on',
+
+    /**
+     * 禁止在定义变量之前就使用它.
+     * @reason 编译阶段检查就足够了.
+     */
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+
+    /**
+     * 使用 includes 而不是 indexOf.
+     */
+    '@typescript-eslint/prefer-includes': 'off',
+
+    /**
+     * 使用 ?? 替代 ||.
+     */
+    '@typescript-eslint/prefer-nullish-coalescing': 'on',
+
+    /**
+     * 私有变量如果没有在构造函数外被赋值，则必须设为 readonly.
+     */
+    '@typescript-eslint/prefer-readonly': 'off',
+    /**
+     * 函数的参数必须设置为 readonly.
+     */
+    '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+
+    /**
+     * 使用 reduce 方法时，必须传入范型，而不是对第二个参数使用 as.
+     */
+    '@typescript-eslint/prefer-reduce-type-parameter': 'off',
+
+    /**
+     * async 函数的返回值必须是 Promise.
+     */
+    '@typescript-eslint/promise-function-async': 'on',
+
+    /**
+     * 使用 sort 时必须传入比较函数.
+     */
+    '@typescript-eslint/require-array-sort-compare': 'on',
+
+    /**
+     * async 函数中必须存在 await 语句.
+     */
+    'require-await': 'on',
+    '@typescript-eslint/require-await': 'on',
+
+    /**
+     * 模版字符串中的变量类型必须是字符串.
+     */
+    '@typescript-eslint/restrict-template-expressions': 'off',
+
+    /**
+     * 禁止在 return 语句里使用 await.
+     */
+    'no-return-await': 'on',
+    '@typescript-eslint/return-await': 'on',
+
+    /**
+     * 联合类型和交叉类型的每一项必须按字母排序.
+     */
+    '@typescript-eslint/sort-type-union-intersection-members': 'off',
+
+    /**
+     * 禁止使用三斜杠导入文件.
+     * @reason 三斜杠是已废弃的语法，但在类型声明文件中还是可以使用的.
+     */
+    '@typescript-eslint/triple-slash-reference': [
+      'error',
+      {
+        path: 'never',
+        types: 'always',
+        lib: 'always',
+      },
+    ],
+
+    /**
+     * interface 和 type 定义时必须声明成员的类型.
+     */
+    '@typescript-eslint/typedef': [
+      'error',
+      {
+        arrayDestructuring: false,
+        arrowParameter: false,
+        memberVariableDeclaration: false,
+        objectDestructuring: false,
+        parameter: false,
+        propertyDeclaration: true,
+        variableDeclaration: false,
+      },
+    ],
+
+    // TS End ---------------------------------------------------------------------
+
+    /**
+     * 关键字的前后空格.
+     */
+    'keyword-spacing': ['error', { 'before': true, 'after': true }],
+
+    /**
+     * 对象字面量中冒号的前后空格
+     */
+    'key-spacing': ['error', { 'beforeColon': false, 'afterColon': true }],
+
+    /**
+     * 引号类型 `` "" ''
+     */
+    'quotes': ['error', 'single'],
+
+    /**
+     * 逗号前后的空格
+     */
+    'comma-spacing': ['error', { 'before': false, 'after': true }],
+
+    /**
+     * 必须使用全等
+     */
+    'eqeqeq': 'error',
+
+    /**
+     * switch必须写default case.
+     */
+    'default-case': 'error',
+
+    /**
+     * 不能用多余的空格.
+     */
+    'no-multi-spaces': 'error',
+
+    /**
+     * 一行结束后面不要有空格
+     */
+    'no-trailing-spaces': 'error',
+
+    /**
+     * 对象字面量项尾不能有逗号
+     */
+    'comma-dangle': ['error', 'never'],
   },
 };
