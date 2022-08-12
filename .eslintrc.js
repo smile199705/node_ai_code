@@ -363,7 +363,7 @@ module.exports = {
 
     "no-unsafe-negation": ["error"], // 禁止对关系运算符的左操作数使用否定操作符
 
-    "no-magic-numbers": ["error", { "ignoreArrayIndexes": true }], // 禁用魔术数字
+    // "no-magic-numbers": ["error", { "ignoreArrayIndexes": true }], // 禁用魔术数字
 
     "no-empty": ["error", { "allowEmptyCatch": true }], // 禁止出现空语句块
 
