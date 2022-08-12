@@ -1,7 +1,7 @@
 # node-axle
 
 #### Description
-使用nest框架结合ts封装node开发常见的功能(mysql,redis,es,rabbitmq等),开箱即用的功能
+使用nest框架结合ts实践node开发常见的功能(mysql,redis,es,rabbitmq等),开箱即用的功能
 
 #### Software Architecture
 Software architecture description

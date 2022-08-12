@@ -1,4 +1,4 @@
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 /**
  * 定义好基础拦截器后，我们需要改造我们传入的擦书的类型，因为axios提供的AxiosRequestConfig是不允许我们传入拦截器的，

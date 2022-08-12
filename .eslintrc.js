@@ -2,32 +2,24 @@ module.exports = {
   parser: '@typescript-eslint/parser', // eslingt解析器
   parserOptions: { // 指定javascript语言格式
     project: 'tsconfig.json',
-    tsconfigRootDir : __dirname, 
+    tsconfigRootDir : __dirname,
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    // 'plugin:prettier/recommended',
   ],
   root: true, // 此项是用来告诉eslint找当前配置文件不能往父级查找
   env: { // 指定全局变量
+    es6: true,
     node: true,
     jest: true,
   },
   ignorePatterns: ['.eslintrc.js'], // 忽略规则的文件
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-
-    /**
-     * 禁止将 this 赋值给其他变量,除非是解构赋值.
-     */
-    '@typescript-eslint/no-this-alias': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-require-imports': 'off',
     /**
      * for-of代替for循环.
      */
@@ -35,14 +27,12 @@ module.exports = {
     /**
      * ts每个函数都要显式声明返回值.
      */
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-
-    "no-invalid-this": 2, //禁止无效的this，只能用在构造器，类，对象字面量
+    '@typescript-eslint/explicit-module-boundary-types': 'warn',
 
     /**
      * 关闭 any 的警告.
      */
-    '@typescript-eslint/no-explicit-any': ['off'],
+    '@typescript-eslint/no-explicit-any': ['warn'],
 
     /**
      * 禁止混用tab和空格.
@@ -54,6 +44,11 @@ module.exports = {
      */
     'semi': ['error', 'never'],
     '@typescript-eslint/semi':  ['error', 'never'],
+
+    /**
+     * 分号前后空格.
+     */
+    'semi-spacing': ['error', { 'before': false, 'after': true }],
 
     /**
      * 限制数组类型必须使用 Array<T> 或 T[].
@@ -87,8 +82,8 @@ module.exports = {
      * 禁止使用 foo['bar']，必须写成 foo.bar.
      * @reason 当需要写一系列属性的时候，可以更统一.
      */
-    'dot-notation': 'off',
-    '@typescript-eslint/dot-notation': 'off',
+    'dot-notation': 'warn',
+    '@typescript-eslint/dot-notation': 'warn',
 
     /**
      * 函数返回值必须与声明的类型一致.
@@ -114,14 +109,14 @@ module.exports = {
     /**
      * 禁止使用返回值为 void 的函数的返回值.
      */
-    '@typescript-eslint/no-confusing-void-expression': 'off',
+    '@typescript-eslint/no-confusing-void-expression': 'warn',
 
     /**
      * 禁止重复定义类的成员.
      * @reason 编译阶段就会报错了.
      */
-    'no-dupe-class-members': 'off',
-    '@typescript-eslint/no-dupe-class-members': 'off',
+    'no-dupe-class-members': 'warn',
+    '@typescript-eslint/no-dupe-class-members': 'warn',
 
     /**
      * 禁止重复导入模块.
@@ -132,7 +127,7 @@ module.exports = {
     /**
      * 禁止对 array 使用 for in 循环.
      */
-    '@typescript-eslint/no-for-in-array': 'on',
+    '@typescript-eslint/no-for-in-array': 'warn',
 
     /**
      * 禁止在类之外的地方使用 this.
@@ -150,7 +145,7 @@ module.exports = {
     /**
      * 避免错误的使用 Promise.
      */
-    '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/no-misused-promises': 'warn',
 
     /**
      * 禁止使用 namespace 来定义命名空间.
@@ -184,12 +179,12 @@ module.exports = {
     /**
      * 禁止 throw 字面量，必须 throw 一个 Error 对象.
      */
-    'no-throw-literal': 'off',
-    '@typescript-eslint/no-throw-literal': 'off',
+    'no-throw-literal': 'warn',
+    '@typescript-eslint/no-throw-literal': 'warn',
     /**
      * 禁止将变量或属性的类型设置为 any.
      */
-    '@typescript-eslint/no-unsafe-assignment': 'on',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
 
     /**
      * 禁止在定义变量之前就使用它.
@@ -206,7 +201,7 @@ module.exports = {
     /**
      * 使用 ?? 替代 ||.
      */
-    '@typescript-eslint/prefer-nullish-coalescing': 'on',
+    '@typescript-eslint/prefer-nullish-coalescing': 'off',
 
     /**
      * 私有变量如果没有在构造函数外被赋值，则必须设为 readonly.
@@ -225,18 +220,18 @@ module.exports = {
     /**
      * async 函数的返回值必须是 Promise.
      */
-    '@typescript-eslint/promise-function-async': 'on',
+    '@typescript-eslint/promise-function-async': 'warn',
 
     /**
      * 使用 sort 时必须传入比较函数.
      */
-    '@typescript-eslint/require-array-sort-compare': 'on',
+    '@typescript-eslint/require-array-sort-compare': 'off',
 
     /**
      * async 函数中必须存在 await 语句.
      */
-    'require-await': 'on',
-    '@typescript-eslint/require-await': 'on',
+    'require-await': 'off',
+    '@typescript-eslint/require-await': 'off',
 
     /**
      * 模版字符串中的变量类型必须是字符串.
@@ -246,8 +241,8 @@ module.exports = {
     /**
      * 禁止在 return 语句里使用 await.
      */
-    'no-return-await': 'on',
-    '@typescript-eslint/return-await': 'on',
+    'no-return-await': 'off',
+    '@typescript-eslint/return-await': 'off',
 
     /**
      * 联合类型和交叉类型的每一项必须按字母排序.
@@ -328,6 +323,59 @@ module.exports = {
     /**
      * 对象字面量项尾不能有逗号
      */
-    'comma-dangle': ['error', 'never'],
+
+    'comma-dangle': [2, 'never'], // 对象字面量项尾不能有逗号
+
+    'strict': 2, // 使用严格模式
+
+    'arrow-spacing': [2, {
+      'before': true,
+      'after': true
+    }],//箭头函数中的箭头前后加空格
+
+    'block-spacing': [2, 'never'],//花括号内前后加空格
+
+    "brace-style": ["error", "1tbs",], // 强制在代码块中使用一致的大括号风格
+
+    "space-before-function-paren": ["error", "always"], // 强制在 function的左括号之前使用一致的空格
+
+    // "space-after-function-paren": ["error", "always"], // 强制在 function的左括号之前使用一致的空格
+
+    "space-unary-ops": ["error", { "words": true, "nonwords": false }], // 强制在一元操作符前后使用一致的空格
+
+    "spaced-comment": ["error", "always"], // 强制在注释中 // 或 /* 使用一致的空格
+
+    'space-infix-ops': 'warn', // 要求操作符周围有空格
+
+    "operator-linebreak": ["error", "after"], // 强制操作符使用一致的换行符
+
+    "max-nested-callbacks": ["error", 3], // 强制回调函数最大嵌套深度
+
+    "max-depth": ["error", 4], // 强制可嵌套的块的最大深度
+
+    "linebreak-style": ["error", "unix"], // 换行符风格
+
+    "max-params": ["error", 6], // 强制函数定义中最多允许的参数数量
+
+    "no-empty-pattern": ["error"], // 禁止使用空解构模式
+
+    "no-useless-escape": ["error"], // 禁用不必要的转义字符
+
+    "no-unsafe-negation": ["error"], // 禁止对关系运算符的左操作数使用否定操作符
+
+    "no-magic-numbers": ["error", { "ignoreArrayIndexes": true }], // 禁用魔术数字
+
+    "no-empty": ["error", { "allowEmptyCatch": true }], // 禁止出现空语句块
+
+    "no-cond-assign": ["error", "always"], // 禁止条件表达式中出现赋值操作符
+
+    "multiline-comment-style": ["error", "starred-block"], // 强制对多行注释使用特定风格
+
+    "multiline-ternary": ["error", "always-multiline"], // 要求或禁止在三元操作数中间换行
+
+    "new-cap": ["error", { "capIsNew": false }], // 要求构造函数首字母大写
+
+    "eol-last": ["error", "always"], // 要求或禁止文件末尾存在空行
+
   },
 };

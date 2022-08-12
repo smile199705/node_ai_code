@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { UserModule } from './modules';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as Joi from '@hapi/joi';
+import { Module } from '@nestjs/common'
+import { UserModule } from './modules'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import * as Joi from '@hapi/joi'
 
 @Module({
   imports: [
@@ -19,10 +19,10 @@ import * as Joi from '@hapi/joi';
         HTTP_MAX_REDIRECTS: Joi.number().default(5),
         NODE_ENV: Joi.string()
           .valid('development', 'production', 'test', 'provision')
-          .default('development'),
-      }),
+          .default('development')
+      })
     }),
-    UserModule,
-  ],
+    UserModule
+  ]
 })
 export class AppModule {}
