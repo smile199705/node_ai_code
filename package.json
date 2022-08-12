@@ -67,7 +67,7 @@
     }
   },
   "lint-staged": {
-    "*.ts | *.js": "eslint"
+    "*.ts": "eslint"
   },
   "jest": {
     "moduleFileExtensions": [
