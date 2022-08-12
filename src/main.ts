@@ -19,10 +19,12 @@ async function bootstrap () {
    */
   app.setGlobalPrefix('axle')
 
-  // 全局异常捕捉过滤器
-  const logger = app.get(Logger)
-  console.log(logger, '===========')
-  app.useGlobalFilters(new HttpExceptionFilter(logger))
+  /*
+   * 全局异常捕捉过滤器
+   * const logger = app.get(Logger)
+   * console.log(logger, '===========')
+   * app.useGlobalFilters(new HttpExceptionFilter(logger))
+   */
   await app.listen(3000)
 }
 bootstrap().then(() => {

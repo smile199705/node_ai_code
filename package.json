@@ -1,8 +1,8 @@
 {
   "name": "node_axle",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "node服务端系统实践",
+  "author": "阿伟",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

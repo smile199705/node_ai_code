@@ -15,6 +15,11 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
     console.log()
   }
 
+  /**
+   * 异常处理
+   * @param exception 异常
+   * @param host 主机
+   */
   public catch (exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()

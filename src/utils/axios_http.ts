@@ -45,7 +45,7 @@ class Request {
       // 全局请求拦截器
       (res: AxiosRequestConfig) => {
         // 成功
-        console.log('全局请求拦截器')
+        console.log('全局请求拦截器', res)
         return res
       },
       (error: any) => error
@@ -74,7 +74,7 @@ class Request {
     )
   }
 
-  async requestTest (config: AxiosRequestConfig) {
+  public async requestTest (config: AxiosRequestConfig) {
     return this.request.request(config)
   }
 
@@ -86,7 +86,12 @@ class Request {
     // let result = {};
     try {
       console.log(url)
-      const res: IResponse = await this.request.get(url)
+      const res: IResponse = await this.request.get(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          'state-in-body': 'true'
+        }
+      })
       return res
     } catch (e) {
       console.log(e)
