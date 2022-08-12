@@ -67,7 +67,7 @@
     }
   },
   "lint-staged": {
-    "*.ts": "eslint"
+    "*.{ts, js}": "eslint --fix"
   },
   "jest": {
     "moduleFileExtensions": [
