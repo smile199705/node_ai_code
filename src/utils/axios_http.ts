@@ -83,20 +83,13 @@ class Request {
     query: { [key: string]: any }
   ): Promise<{ [key: string]: any }> {
     const url = (path += query ? `?${qs.stringify(query)}` : '')
-    // let result = {};
     try {
       console.log(url)
-      const res: IResponse = await this.request.get(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          'state-in-body': 'true'
-        }
-      })
+      const res: IResponse = await this.request.get(url)
       return res
     } catch (e) {
       console.log(e)
     }
-    // return result;
   }
 
   public async post (
@@ -111,8 +104,8 @@ class Request {
         qs.stringify(data),
         {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'state-in-body': 'true'
+            'Content-Type': 'application/json;charset=UTF-8'
+            // 'state-in-body': 'true'
           }
         }
       )
