@@ -1,6 +1,6 @@
 import { Logger, PinoLogger } from 'nestjs-pino'
-import moment from 'moment'
-
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const moment = require('moment')
 import {
   ExceptionFilter,
   Catch,

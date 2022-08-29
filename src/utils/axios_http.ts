@@ -45,8 +45,7 @@ class Request {
       // 全局请求拦截器
       (res: AxiosRequestConfig) => {
         // 成功
-        console.log('请求接口：', { url: res.baseURL + res.url, method: res.method, params: res })
-        console.log('请求参数：', res.method)
+        console.log('请求接口：', { url: res.baseURL + res.url, method: res.method })
         return res
       },
       (error: any) => error
@@ -72,7 +71,10 @@ class Request {
         console.log(res, '这是响应')
         return res.data ? res.data : res
       },
-      (error: any) => error
+      (error: any) => {
+        console.log(error, '==========')
+        return error
+      }
     )
   }
 

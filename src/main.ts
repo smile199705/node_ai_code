@@ -20,11 +20,11 @@ async function bootstrap () {
   app.setGlobalPrefix('axle')
 
    // 全局异常捕捉过滤器
-   //  const logger = app.get(Logger)
-   //  app.useLogger(logger)
-   //  console.log(logger, '===========')
-   //  app.useGlobalFilters(new HttpExceptionFilter(logger))
-  await app.listen(process.env.SERVE_LISTENER_PORT)
+    const logger = app.get(Logger)
+    app.useGlobalFilters(new HttpExceptionFilter(logger))
+  const configService = app.get(ConfigService)
+  await app.listen(configService.get('SERVE_LISTENER_PORT'))
+
 }
 bootstrap().then(() => {
   start_printf()
