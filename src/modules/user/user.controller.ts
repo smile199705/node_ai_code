@@ -7,8 +7,10 @@ export class UserController {
   constructor (private readonly userService: UserService) {}
 
   @Get('test')
-  public async test () {
+  public async test (): Promise<any> {
+    console.log('这是测试')
     const res = await this.userService.testDemo()
     return res
   }
+
 }

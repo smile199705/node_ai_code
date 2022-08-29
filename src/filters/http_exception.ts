@@ -1,4 +1,4 @@
-import { Logger } from 'nestjs-pino'
+import { Logger, PinoLogger } from 'nestjs-pino'
 import moment from 'moment'
 
 import {
@@ -11,9 +11,9 @@ import {
 import { Request, Response } from 'express'
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter<Error> {
-  constructor (private readonly logger: Logger) {
-    console.log()
-  }
+   constructor (private readonly logger: Logger) {
+      console.log()
+    }
 
   /**
    * 异常处理

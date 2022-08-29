@@ -333,9 +333,13 @@ module.exports = {
       'after': true
     }],//箭头函数中的箭头前后加空格
 
-    'block-spacing': [2, 'never'],//花括号内前后加空格
+    'block-spacing': [2, 'always'],//花括号内前后加空格
 
     "brace-style": ["error", "1tbs",], // 强制在代码块中使用一致的大括号风格
+
+    // "array-bracket-spacing": ["error","always"], // 让数组内前后有空格
+
+    "object-curly-spacing": ["error","always"], // 对象括号内保持前后有空格
 
     "space-before-function-paren": ["error", "always"], // 强制在 function的左括号之前使用一致的空格
 
@@ -343,7 +347,7 @@ module.exports = {
 
     "space-unary-ops": ["error", { "words": true, "nonwords": false }], // 强制在一元操作符前后使用一致的空格
 
-    "spaced-comment": ["error", "always"], // 强制在注释中 // 或 /* 使用一致的空格
+    // "spaced-comment": ["error", "always"], // 强制在注释中 // 或 /* 使用一致的空格
 
     'space-infix-ops': 'warn', // 要求操作符周围有空格
 
@@ -369,7 +373,7 @@ module.exports = {
 
     "no-cond-assign": ["error", "always"], // 禁止条件表达式中出现赋值操作符
 
-    "multiline-comment-style": ["error", "starred-block"], // 强制对多行注释使用特定风格
+    // "multiline-comment-style": ["error", "starred-block"], // 强制对多行注释使用特定风格
 
     "multiline-ternary": ["error", "always-multiline"], // 要求或禁止在三元操作数中间换行
 

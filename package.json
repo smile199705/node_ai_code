@@ -2,7 +2,10 @@
   "name": "node_axle",
   "version": "0.0.1",
   "description": "node服务端系统实践",
-  "author": "阿伟",
+  "author": {
+    "email": "18391952502@163.com",
+    "name": "yang"
+  },
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -18,7 +21,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "pm2:start": "pm2 start ecosystem.config.js --name=nodeService"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
@@ -30,7 +34,7 @@
     "joi": "^17.6.0",
     "moment": "^2.29.3",
     "nestjs-pino": "^2.6.0",
-    "pino-http": "^7.1.0",
+    "pino-http": "^6.1.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
@@ -50,8 +54,8 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^4.2.3",
-    "lint-staged": "^10.0.8",
     "jest": "^27.2.5",
+    "lint-staged": "^10.0.8",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",

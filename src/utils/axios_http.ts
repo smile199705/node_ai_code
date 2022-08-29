@@ -45,7 +45,8 @@ class Request {
       // 全局请求拦截器
       (res: AxiosRequestConfig) => {
         // 成功
-        console.log('全局请求拦截器', res)
+        console.log('请求接口：', { url: res.baseURL + res.url, method: res.method, params: res })
+        console.log('请求参数：', res.method)
         return res
       },
       (error: any) => error
@@ -68,13 +69,17 @@ class Request {
     this.request.interceptors.response.use(
       // 因为返回的数据都在res.data下面，所以直接返回res.data
       (res: AxiosRequestConfig) => {
+        console.log(res, '这是响应')
         return res.data ? res.data : res
       },
       (error: any) => error
     )
   }
 
-  public async requestTest (config: AxiosRequestConfig) {
+  /*
+    使用时，指定接口baseURL, url， method， header等信息,达到可以请求任意http接口
+   */
+  public async httpRequest (config: AxiosRequestConfig) {
     return this.request.request(config)
   }
 
@@ -84,7 +89,6 @@ class Request {
   ): Promise<{ [key: string]: any }> {
     const url = (path += query ? `?${qs.stringify(query)}` : '')
     try {
-      console.log(url)
       const res: IResponse = await this.request.get(url)
       return res
     } catch (e) {
