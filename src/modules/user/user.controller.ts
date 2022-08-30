@@ -1,13 +1,19 @@
-import { Controller, Get } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Query, UsePipes } from '@nestjs/common'
 // import { PinoLogger } from 'nestjs-pino';
-import { UserService } from './user.service' // 日志处理模块，较轻量，自定义丰富，性能高
+import { UserService } from './user.service'
+import { ValidationPipe } from '../../pipes/validationPipe'
+import { TestDto } from '../../pipes/user/testDto'
 
 @Controller('user')
 export class UserController {
   constructor (private readonly userService: UserService) {}
 
-  @Get('test')
-  public async test (): Promise<any> {
+  @Post('test')
+  @UsePipes(ValidationPipe)
+  public async test (@Body() testDto: TestDto): Promise<any> {
+    // 参数解构
+    const { name, age } = testDto
+    console.log(name, age, 'test-------------')
     const res = await this.userService.testDemo()
     return res
   }

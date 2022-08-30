@@ -4,6 +4,7 @@ import { start_printf } from './utils/start_printf'
 import { HttpExceptionFilter } from './filters'
 import { Logger } from 'nestjs-pino'
 import { ConfigService } from '@nestjs/config'
+import { ValidationPipe } from './pipes/validationPipe'
 
 async function bootstrap () {
   /**
@@ -19,10 +20,14 @@ async function bootstrap () {
    */
   app.setGlobalPrefix('axle')
 
+  // 设置全局参数管道
+  app.useGlobalPipes(new ValidationPipe())
+
    // 全局异常捕捉过滤器
-    const logger = app.get(Logger)
-    app.useGlobalFilters(new HttpExceptionFilter(logger))
+  const logger = app.get(Logger)
+  app.useGlobalFilters(new HttpExceptionFilter(logger))
   const configService = app.get(ConfigService)
+  // 端口号
   await app.listen(configService.get('SERVE_LISTENER_PORT'))
 
 }

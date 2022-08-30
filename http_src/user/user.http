@@ -1,2 +1,7 @@
 ## 测试案例
-GET localhost:8000/axle/user/test
+POST localhost:3002/axle/user/test
+
+{
+  'name': 'zhangsan',
+  'age': 12
+}

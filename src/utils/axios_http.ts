@@ -68,11 +68,21 @@ class Request {
     this.request.interceptors.response.use(
       // 因为返回的数据都在res.data下面，所以直接返回res.data
       (res: AxiosRequestConfig) => {
-        console.log(res, '这是响应')
-        return res.data ? res.data : res
+        if (res.data.state === 200) {
+          return {
+            ret: 200,
+            data: res.data,
+            message: 'ok'
+          }
+        } else {
+          return {
+            ret: 500,
+            data: res,
+            message: 'fail'
+          }
+        }
       },
       (error: any) => {
-        console.log(error, '==========')
         return error
       }
     )
