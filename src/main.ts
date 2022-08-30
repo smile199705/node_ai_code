@@ -4,7 +4,8 @@ import { start_printf } from './utils/start_printf'
 import { HttpExceptionFilter } from './filters'
 import { Logger } from 'nestjs-pino'
 import { ConfigService } from '@nestjs/config'
-import { ValidationPipe } from './pipes/validationPipe'
+import { ValidationPipe } from './pipes/validation.pipe'
+import { TransformInterceptor } from './interceptor/transform.interceptor'
 
 async function bootstrap () {
   /**
@@ -22,6 +23,9 @@ async function bootstrap () {
 
   // 设置全局参数管道
   app.useGlobalPipes(new ValidationPipe())
+
+  // 设置响应拦截器
+  app.useGlobalInterceptors(new TransformInterceptor())
 
    // 全局异常捕捉过滤器
   const logger = app.get(Logger)

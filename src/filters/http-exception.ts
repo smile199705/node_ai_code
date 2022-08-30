@@ -34,21 +34,16 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
       state: status,
       msg: exception.message,
       data: {
-        error: exception.name,
+        error: exception,
         date: nowDate,
         path: request.url
       }
     }
     this.logger.error(
-      `【${nowDate}】${request.method} ${request.url} query:${JSON.stringify(
-        request.query
-      )} params:${JSON.stringify(request.params)} body:${JSON.stringify(
-        request.body
-      )}`,
+      `【${nowDate}】${request.method} ${request.url} query:${JSON.stringify(request.query)} params:${JSON.stringify(request.params)} body:${JSON.stringify(request.body)}`,
       JSON.stringify(errorResponse),
       'HttpExceptionFilter'
     )
-
     response.status(status).json(errorResponse)
   }
 }

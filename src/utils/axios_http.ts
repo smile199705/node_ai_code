@@ -70,15 +70,15 @@ class Request {
       (res: AxiosRequestConfig) => {
         if (res.data.state === 200) {
           return {
-            ret: 200,
+            code: 200,
             data: res.data,
             message: 'ok'
           }
         } else {
           return {
-            ret: 500,
+            code: 500,
             data: res,
-            message: 'fail'
+            message: 'error'
           }
         }
       },

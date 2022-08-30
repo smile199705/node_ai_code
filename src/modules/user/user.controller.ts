@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Query, UsePipes } from '@nestjs/common'
 // import { PinoLogger } from 'nestjs-pino';
 import { UserService } from './user.service'
-import { ValidationPipe } from '../../pipes/validationPipe'
+import { ValidationPipe } from '../../pipes/validation.pipe'
 import { TestDto } from '../../pipes/user/testDto'
 
 @Controller('user')
