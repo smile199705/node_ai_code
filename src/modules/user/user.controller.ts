@@ -9,7 +9,7 @@ export class UserController {
   constructor (private readonly userService: UserService) {}
 
   @Post('test')
-  @UsePipes(ValidationPipe)
+  // @UsePipes(ValidationPipe)
   public async test (@Body() testDto: TestDto): Promise<any> {
     // 参数解构
     const { name, age } = testDto

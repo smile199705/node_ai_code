@@ -18,10 +18,15 @@ export class ValidationPipe implements PipeTransform<any> {
         }
         // 将对象转换为Class来验证
         const object = plainToClass(metatype, value)
-        console.log(object, '####################', typeof object.age)
         const errors = await validate(object) // 同步阻塞，返回检验结果
         if (errors.length > 0) {
-            throw new BadRequestException('Validation failed')
+            let msg = ''
+            let isNo
+            if (errors[0].constraints) {
+                isNo = Object.keys(errors[0].constraints).join('').includes('is')
+                msg = Object.keys(errors[0]?.constraints)[0].slice(2)
+            }
+            throw new BadRequestException(isNo ? ('The type of ' + `${errors[0]?.property}` + ' should be of a ' + `${msg}`) : `${Object.values(errors[0].constraints)[0]}`)
         }
         return value
     }

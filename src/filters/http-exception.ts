@@ -32,11 +32,11 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
     const nowDate = moment().format('YYYY-MM-DD HH:mm:ss')
     const errorResponse = {
       state: status,
-      msg: exception.message,
+      msg: exception.name,
       data: {
-        error: exception,
+        path: request.url,
         date: nowDate,
-        path: request.url
+        msg: exception.stack
       }
     }
     this.logger.error(
