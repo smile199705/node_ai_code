@@ -4,6 +4,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import * as Joi from '@hapi/joi'
 import { LoggerModule } from 'nestjs-pino'
 import { pinoHttpOption } from '../config/development/pino.config'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { MysqlModule } from './modules/data'
 
 @Module({
   imports: [
@@ -31,6 +33,7 @@ import { pinoHttpOption } from '../config/development/pino.config'
           .default('development')
       })
     }),
+    MysqlModule,
     UserModule
   ]
 })

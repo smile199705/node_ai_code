@@ -1,0 +1,18 @@
+{
+  "env": "development",
+  "db": {
+    "axle": {
+      "host": "rm-bp10d792y60y9fngk.mysql.rds.aliyuncs.com",
+      "port": "3306",
+      "username": "root",
+      "password": "Synergyinfo^dev",
+      "poll": {
+        "max": 10,
+        "min": 0,
+        "acquire": 30000,
+        "idle": 10000
+      },
+      "timezone": "+08:00"
+    }
+  }
+}
