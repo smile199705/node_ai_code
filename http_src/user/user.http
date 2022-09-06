@@ -2,6 +2,6 @@
 POST localhost:3002/axle/user/test
 
 {
-  'name': 'zhangsan',
-  'age': 12
+  "name": "zhangsan",
+  "age": 12
 }

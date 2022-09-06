@@ -1,21 +1,16 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
 import { UserModule } from './modules'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+// import { WinstonModule } from 'nest-winston'
+import * as winston from 'winston'
 import * as Joi from '@hapi/joi'
-import { LoggerModule } from 'nestjs-pino'
-import { pinoHttpOption } from '../config/development/pino.config'
-import { TypeOrmModule } from '@nestjs/typeorm'
 import { MysqlModule } from './modules/data'
+import { Logger } from 'winston'
+import { WinstonModule } from './lib/winston/winston.module'
+
 
 @Module({
   imports: [
-      LoggerModule.forRootAsync({
-        imports: [ConfigModule],
-        inject: [ConfigService],
-        useFactory: async (configService: ConfigService) => {
-          return { pinoHttp: pinoHttpOption(configService.get('NODE_ENV')) }
-        }
-      }),
     ConfigModule.forRoot({
       encoding: 'utf-8',
       envFilePath: [],
@@ -34,7 +29,14 @@ import { MysqlModule } from './modules/data'
       })
     }),
     MysqlModule,
-    UserModule
+    UserModule,
+    WinstonModule
   ]
+  // providers: [
+  //   {
+  //     provide: Logger,
+  //     useClass: CommonLogger
+  //   }
+  // ]
 })
 export class AppModule {}

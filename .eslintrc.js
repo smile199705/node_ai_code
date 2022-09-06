@@ -95,7 +95,7 @@ module.exports = {
      * 必须设置类的成员的可访问性.
      * @reason 将不需要公开的成员设为私有的，可以增强代码的可理解性，对文档输出也很友好.
      */
-    '@typescript-eslint/explicit-member-accessibility': ['error', {
+    '@typescript-eslint/explicit-member-accessibility': ['warn', {
       accessibility: 'explicit',
       overrides: {
         accessors: 'explicit',
@@ -201,7 +201,7 @@ module.exports = {
     /**
      * 使用 ?? 替代 ||.
      */
-    '@typescript-eslint/prefer-nullish-coalescing': 'off',
+    '@typescript-eslint/prefer-nullish-coalescing': 'warn',
 
     /**
      * 私有变量如果没有在构造函数外被赋值，则必须设为 readonly.

@@ -1,4 +1,5 @@
-import { Logger, PinoLogger } from 'nestjs-pino'
+
+import winston, { Logger } from 'winston'
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const moment = require('moment')
 import {
@@ -9,11 +10,11 @@ import {
   HttpStatus
 } from '@nestjs/common'
 import { Request, Response } from 'express'
-@Catch()
+// import { CommonLogger } from '../logger'
+@Catch() // 捕获所有异常
 export class HttpExceptionFilter implements ExceptionFilter<Error> {
-   constructor (private readonly logger: Logger) {
-      console.log()
-    }
+  constructor (private readonly logger: winston.Logger) {
+  }
 
   /**
    * 异常处理
@@ -39,11 +40,10 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
         msg: exception.stack
       }
     }
-    this.logger.error(
-      `【${nowDate}】${request.method} ${request.url} query:${JSON.stringify(request.query)} params:${JSON.stringify(request.params)} body:${JSON.stringify(request.body)}`,
-      JSON.stringify(errorResponse),
-      'HttpExceptionFilter'
-    )
+    // this.logger.error(
+    //   `【${nowDate}】${request.method} ${request.url} query:${JSON.stringify(request.query)} params:${JSON.stringify(request.params)} body:${JSON.stringify(request.body)}`,
+    //   JSON.stringify(errorResponse)
+    // )
     response.status(status).json(errorResponse)
   }
 }
