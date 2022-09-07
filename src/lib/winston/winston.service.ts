@@ -4,6 +4,7 @@ import * as winston from 'winston'
 const { combine, printf } = winston.format
 import * as DailyRotateFile from 'winston-daily-rotate-file'
 import * as join from 'path'
+import { transports } from 'winston'
 
 const shorten = Symbol('CommonLogger#shorten')
 const desensitize = Symbol('CommonLogger#desensitize')
@@ -89,7 +90,7 @@ export class WinstonService {
             format: combine(
                 customFormat
             ),
-            transports: [transportDefault, transportError]
+            transports: [transportDefault, transportError, new transports.Console()]
         })
     }
 

@@ -18,7 +18,7 @@ export class ValidationPipe implements PipeTransform<any> {
         }
         // 将对象转换为Class来验证
         const object = plainToClass(metatype, value)
-        console.log(object, '===========')
+        // console.log(object, '===========')
         const errors = await validate(object) // 同步阻塞，返回检验结果
         if (errors.length > 0) {
             let msg = ''

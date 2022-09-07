@@ -4,7 +4,7 @@ import { WinstonService } from './winston.service'
 
 export const WinstonProvider: Provider = {
     provide: WINSTON_PROVIDER,
-    useFactory: (config): WinstonService => {
+    useFactory: async (config): Promise<WinstonService> => {
         return new WinstonService(config)
     }
 }
