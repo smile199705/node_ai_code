@@ -15,13 +15,11 @@ export class UserController {
     // logger = new Logger(UserController.name)
   }
 
-  @Post('test')
+  @Get('tests')
   // @UsePipes(ValidationPipe)
-  public async test (@Body() testDto: TestDto): Promise<any> {
+  public async test (@Query() testDto: TestDto): Promise<any> {
     // 参数解构
-    const { name, age } = testDto
-    console.log(name, age, '=========')
-    this.logger.info('hahha', new Error('这是错误'))
+    this.logger.info('hahha', testDto)
     const res = await this.userService.testDemo()
     this.logger.info('数据', res)
     console.log(res, '=====-=-=-------')

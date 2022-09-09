@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
 import { UserModule } from './modules'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { WinstonModule } from 'nest-winston'
+// import { WinstonModule } from 'nest-winston'
 import * as winston from 'winston'
 import * as Joi from '@hapi/joi'
 import * as path from 'path'
@@ -9,7 +9,7 @@ import { MysqlModule } from './modules/data'
 import { transports } from 'winston'
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const httpContext = require('express-http-context')
-// import { WinstonModule } from './lib/winston/winston.module'
+import { WinstonModule } from './lib/winston/winston.module'
 const { clientName, serverName } = httpContext.get('context')
 
 
@@ -33,14 +33,14 @@ const { clientName, serverName } = httpContext.get('context')
       })
     }),
     MysqlModule,
-    UserModule,
-    // WinstonModule.withConfig({ serverName: serverName })
-    WinstonModule.forRoot({
-      transports: [
-        new winston.transports.Console(),
-        new winston.transports.File({ filename: '/logs/default.log' })
-      ]
-    })
+    UserModule
+    // WinstonModule.forRoot({})
+    // WinstonModule.forRoot({
+    //   transports: [
+    //     new winston.transports.Console(),
+    //     new winston.transports.File({ filename: '/logs/default.log' })
+    //   ]
+    // })
   ]
   // providers: [
   //   {

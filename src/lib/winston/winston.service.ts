@@ -3,8 +3,10 @@ import { WinstonConfig } from './winston.config'
 import * as winston from 'winston'
 const { combine, printf } = winston.format
 import * as DailyRotateFile from 'winston-daily-rotate-file'
-import * as join from 'path'
+import * as path from 'path'
+import { NextFunction, Request, Response } from 'express'
 import { transports } from 'winston'
+import { CONFIG } from './constants'
 
 const shorten = Symbol('CommonLogger#shorten')
 const desensitize = Symbol('CommonLogger#desensitize')
@@ -14,15 +16,15 @@ const composeProcess = Symbol('CommonLogger#composeProcess')
 
 @Injectable()
 export class WinstonService {
-    private desFields: any[]
-    private shortenFields: any[]
+    private desFields: any
+    private shortenFields: any
+    // private logger
     private logger: winston.Logger
-    constructor (options?: any) {
-        const loggerConfig = Object.assign(WinstonConfig, options)
-        const { loggerPath, maxSize, level, blankSpace, serverName } = loggerConfig
-        this.desFields = loggerConfig.desFields
-        this.shortenFields = loggerConfig.shorten
-
+    constructor () {
+        // const loggerConfig = Object.assign(WinstonConfig, options)
+        const { loggerPath, maxSize, level, blankSpace, desFields, shorten } = CONFIG
+        this.desFields = desFields
+        this.shortenFields = shorten
         // if (!serverName) {
         //     throw new Error(`当前系统的名称 serverName:${serverName} 不能为空!`)
         // }
@@ -32,7 +34,7 @@ export class WinstonService {
          */
         const transportDefault = new (winston.transports.DailyRotateFile)({
             level,
-            filename: join.join(loggerPath, serverName, '/default-%DATE%.log'),
+            filename: path.join(loggerPath, '/default-%DATE%.log'),
             datePattern: 'YYYY-MM-DD',
             zippedArchive: true,
             createSymlink: true,
@@ -46,7 +48,7 @@ export class WinstonService {
          */
         const transportError = new (winston.transports.DailyRotateFile)({
             level: 'error',
-            filename: join.join(loggerPath, serverName, '/error-%DATE%.log'),
+            filename: path.join(loggerPath, '/error-%DATE%.log'),
             datePattern: 'YYYY-MM-DD',
             zippedArchive: true,
             createSymlink: true,
@@ -62,12 +64,12 @@ export class WinstonService {
             const { level: customLevel, message } = info
             const logObj = {
                 level: customLevel,
-                ...message,
-                serverName
+                ...message
             }
 
             let content = JSON.stringify(logObj)
             if (this.shortenFields.length > 0) {
+                // @ts-ignore
                 content = this[shorten](content)
             }
             if (this.desFields.length > 0) {
@@ -86,7 +88,7 @@ export class WinstonService {
          * @loggerObject 最终的 "logger" 日志对象
          */
         this.logger = winston.createLogger({
-            // defaultMeta: { ServerName },
+            defaultMeta: { service: 'node-axle' },
             format: combine(
                 customFormat
             ),

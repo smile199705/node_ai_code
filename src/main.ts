@@ -9,6 +9,9 @@ import { TransformInterceptor } from './interceptor/transform.interceptor'
 // import { Logger, loggers } from 'winston'
 import { LoggerMiddleware } from './middleware/logger.middleware'
 import { WinstonProvider } from './lib/winston/winston.provider'
+import { WINSTON_PROVIDER } from './lib/winston/constants'
+import { Logger } from 'winston'
+// import { Logger } from '@nestjs/common'
 
 async function bootstrap () {
   /**
@@ -30,8 +33,8 @@ async function bootstrap () {
   // 设置响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor())
 
-  app.use()
-
+  // app.useLogger(app.get(WINSTON_PROVIDER))
+  // app.use(new LoggerMiddleware(Logger).use)
    // 全局异常捕捉过滤器
   // const logger = app.get(Logger)
   // app.useGlobalFilters(new HttpExceptionFilter(logger))
