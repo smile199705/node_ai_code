@@ -1,5 +1,8 @@
 
-import winston, { Logger } from 'winston'
+// import winston, { Logger } from 'winston'
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+// import winston from 'winston'
+
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const moment = require('moment')
 import {
@@ -10,10 +13,12 @@ import {
   HttpStatus
 } from '@nestjs/common'
 import { Request, Response } from 'express'
+import { Log4jsService } from '../lib/log4js/log4js.service'
 // import { CommonLogger } from '../logger'
 @Catch() // 捕获所有异常
 export class HttpExceptionFilter implements ExceptionFilter<Error> {
-  constructor (private readonly logger: winston.Logger) {
+  constructor () {
+    console.log()
   }
 
   /**
@@ -40,10 +45,15 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
         msg: exception.stack
       }
     }
-    // this.logger.error(
-    //   `【${nowDate}】${request.method} ${request.url} query:${JSON.stringify(request.query)} params:${JSON.stringify(request.params)} body:${JSON.stringify(request.body)}`,
-    //   JSON.stringify(errorResponse)
-    // )
+
+    // console.log(request, '#################')
+    // //@ts-ignore
+    // const requestId = request?.requestId || 'HTTP_NO'
+    // this.log4js.logError(`【requestId: ${requestId}】\n message: ${
+    //     exception.message
+    // } \n stack: ${exception.stack} \n ${'='.repeat(20)}
+    //     `)
+    // Object.assign(errorResponse, requestId)
     response.status(status).json(errorResponse)
   }
 }

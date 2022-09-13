@@ -21,6 +21,8 @@ export class WinstonService {
     // private logger
     private logger: winston.Logger
     constructor () {
+        // this.formatContent = options.formatContent
+        // const loggerConfig = Object.assign(CONFIG, option)
         // const loggerConfig = Object.assign(WinstonConfig, options)
         const { loggerPath, maxSize, level, blankSpace, desFields, shorten } = CONFIG
         this.desFields = desFields
