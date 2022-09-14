@@ -6,13 +6,7 @@ import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston'
 import { ConfigService } from '@nestjs/config'
 import { ValidationPipe } from './pipes'
 import { TransformInterceptor } from './interceptor/transform.interceptor'
-// import { Logger, loggers } from 'winston'
 // import { LoggerMiddleware } from './middleware/logger.middleware'
-import { WinstonProvider } from './lib/winston/winston.provider'
-import { WINSTON_PROVIDER } from './lib/winston/constants'
-import { Logger } from 'winston'
-import { LOG4JS_PROVIDER } from './lib/log4js/constants'
-// import { Logger } from '@nestjs/common'
 
 async function bootstrap () {
   /**
@@ -30,17 +24,19 @@ async function bootstrap () {
   app.setGlobalPrefix('axle')
 
   // 设置全局参数管道
-  // app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe())
+
+  // 日志中间件
+  // app.use(new LoggerMiddleware().use)
 
   // 设置响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor())
-  // app.useGlobalInterceptors(new TransformInterceptor(app.get(LOG4JS_PROVIDER)))
 
-  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER))
-  // app.use(new LoggerMiddleware(Logger).use)
-   // 全局异常捕捉过滤器
-  // const logger = app.get(Logger)
-  // app.useGlobalFilters(new HttpExceptionFilter(app.get(LOG4JS_PROVIDER)))
+  // 全局的logger
+  const nestWinston = app.get(WINSTON_MODULE_NEST_PROVIDER)
+  app.useLogger(nestWinston)
+   // 全局异常捕捉过滤器， 异常拦截写入日志
+  app.useGlobalFilters(new HttpExceptionFilter(nestWinston.logger))
   const configService = app.get(ConfigService)
   // 端口号
   await app.listen(configService.get('SERVE_LISTENER_PORT'))

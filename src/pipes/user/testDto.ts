@@ -4,6 +4,6 @@ export class TestDto {
     @IsString({ message: '名字' })
     readonly name: string
 
-    @IsInt({ message: '年龄' })
+    @IsNumber()
     readonly age: number
 }

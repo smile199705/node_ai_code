@@ -1,8 +1,6 @@
 
-// import winston, { Logger } from 'winston'
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-// import winston from 'winston'
-
+import { Logger } from 'winston'
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const moment = require('moment')
 import {
@@ -17,7 +15,7 @@ import { Log4jsService } from '../lib/log4js/log4js.service'
 // import { CommonLogger } from '../logger'
 @Catch() // 捕获所有异常
 export class HttpExceptionFilter implements ExceptionFilter<Error> {
-  constructor () {
+  constructor (private readonly logger: Logger) {
     console.log()
   }
 
@@ -47,12 +45,12 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
     }
 
     // console.log(request, '#################')
-    // //@ts-ignore
-    // const requestId = request?.requestId || 'HTTP_NO'
-    // this.log4js.logError(`【requestId: ${requestId}】\n message: ${
-    //     exception.message
-    // } \n stack: ${exception.stack} \n ${'='.repeat(20)}
-    //     `)
+    //@ts-ignore
+    const requestId = request?.requestId || 'HTTP_NO'
+    this.logger.error(`【requestId: ${requestId}】\n message: ${
+        exception.message
+    } \n stack: ${exception.stack} \n ${'='.repeat(20)}
+        `, )
     // Object.assign(errorResponse, requestId)
     response.status(status).json(errorResponse)
   }

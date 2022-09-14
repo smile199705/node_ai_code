@@ -1,10 +1,9 @@
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common'
-import { WINSTON_PROVIDER } from '../lib/winston/constants'
-// import * as logger from '../lib/winston/winston.service'
 import { Request, Response, NextFunction } from 'express'
-import { WinstonProvider } from '../lib/winston/winston.provider'
-import { WinstonService } from '../lib/winston/winston.service'
-import { Logger } from '../lib/winston/logger'
+import * as winston from 'winston'
+import * as moment from 'moment'
+import { Logger } from 'winston'
+// import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston'
 
 // @Injectable()
 // export class LoggerMiddleware implements NestMiddleware {
