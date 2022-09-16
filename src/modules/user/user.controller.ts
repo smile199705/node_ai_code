@@ -1,24 +1,20 @@
-import { Body, Controller, Get, Inject, Logger, LoggerService, Param, Post, Query, UsePipes } from '@nestjs/common'
-// import { PinoLogger } from 'nestjs-pino';
+import { Body, Controller, Get, Inject, Param, Post, Query } from '@nestjs/common'
 import { UserService } from './user.service'
 import { TestDto } from '../../pipes/user/testDto'
-import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
-// import { Console } from '../../loggers/loggers'
+import { Logger } from '../../loggers/log4js'
 
 @Controller('user')
 export class UserController {
   constructor (
-      // @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: LoggerService,
-      @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
       private readonly userService: UserService,
   ) {}
 
-  @Post('test')
-  // @UsePipes(ValidationPipe)
-  public async test (@Body() testDto: TestDto): Promise<any> {
+  @Get('test')
+  public async test (@Query() testDto: TestDto): Promise<any> {
     const res = await this.userService.testDemo()
-    this.logger.log('', res)
-    // Console.log('info', res)
+    Logger.error('测试的')
+    console.log(testDto, '^^^^^^^^')
+    console.log('res')
     return res
   }
 

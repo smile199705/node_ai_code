@@ -1,7 +1,7 @@
 ## 测试案例
-GET 127.0.0.1:3005/axle/user/test
+POST 127.0.0.1:3005/axle/user/test
 
-#{
-#  "name": "zhangsan",
-#  "age": 12
-#}
+{
+  "name": "zhangsan",
+  "age": 12
+}

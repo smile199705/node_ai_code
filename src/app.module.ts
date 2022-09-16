@@ -7,7 +7,7 @@ import * as DailyRotateFile from 'winston-daily-rotate-file'
 import * as Joi from '@hapi/joi'
 import * as path from 'path'
 import { MysqlModule } from './modules/data'
-import { WinstonModule } from 'nest-winston'
+import { WINSTON_MODULE_NEST_PROVIDER, WinstonModule } from 'nest-winston'
 import { Console, FileError, FileInfo } from './loggers/loggers'
 // import { LoggerMiddleware } from './middleware/logger.middleware'
 
@@ -36,18 +36,14 @@ import { Console, FileError, FileInfo } from './loggers/loggers'
       })
     }),
     MysqlModule,
-    UserModule,
-    WinstonModule.forRoot({
-      transports: [
-          Console,
-          FileInfo,
-          FileError
-      ]
-    })
+    UserModule
+    // WinstonModule.forRoot({
+    //   transports: [
+    //       Console,
+    //       FileInfo,
+    //       FileError
+    //   ]
+    // })
   ]
 })
-export class AppModule implements NestModule {
-  public configure (consumer: MiddlewareConsumer): any {
-    // consumer.apply(LoggerMiddleware).forRoutes('/')
-  }
-}
+export class AppModule {}
