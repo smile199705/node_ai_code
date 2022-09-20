@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common'
 import { WinstonConfig } from './winston.config'
 import * as winston from 'winston'
 const { combine, printf } = winston.format
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const expressWinston = require('express-winston')
 import * as DailyRotateFile from 'winston-daily-rotate-file'
 import * as path from 'path'
 import { NextFunction, Request, Response } from 'express'
@@ -34,7 +36,7 @@ export class WinstonService {
         /**
          * @defaultLog 设置默认的日志输出
          */
-        const transportDefault = new (winston.transports.DailyRotateFile)({
+        const transportDefault = new DailyRotateFile({
             level,
             filename: path.join(loggerPath, '/default-%DATE%.log'),
             datePattern: 'YYYY-MM-DD',
@@ -48,7 +50,7 @@ export class WinstonService {
         /**
          * @errorLog 设置error类型的日志输出
          */
-        const transportError = new (winston.transports.DailyRotateFile)({
+        const transportError = new DailyRotateFile({
             level: 'error',
             filename: path.join(loggerPath, '/error-%DATE%.log'),
             datePattern: 'YYYY-MM-DD',
@@ -89,36 +91,36 @@ export class WinstonService {
         /**
          * @loggerObject 最终的 "logger" 日志对象
          */
-        this.logger = winston.createLogger({
+        this.logger = winston.createLogger(expressWinston.logger({
             defaultMeta: { service: 'node-axle' },
             format: combine(
                 customFormat
             ),
             transports: [transportDefault, transportError, new transports.Console()]
-        })
+        }))
     }
 
     // debug
     public debug (content, e): void {
-        const cont = this[composeProcess](content, e)
-        this.logger.debug(cont)
+        // const cont = this[composeProcess](content, e)
+        this.logger.debug(content, e)
     }
 
     // info
-    public info (content, e): void {
-        const cont = this[composeProcess](content, e)
-        this.logger.info(cont)
+    public info (content): void {
+        // const cont = this[composeProcess](content, e)
+        this.logger.info(content)
     }
 
     // warn
     public warn (content, e): void {
-        const cont = this[composeProcess](content, e)
-        this.logger.warn(cont)
+        // const cont = this[composeProcess](content, e)
+        this.logger.warn(content, e)
     }
 
     // error
     public error (content, e): void {
-        const cont = this[composeProcess](content, e)
-        this.logger.error(cont)
+        // const cont = this[composeProcess](content, e)
+        this.logger.error(content, e)
     }
 }

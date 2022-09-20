@@ -3,6 +3,7 @@ import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import type { RequestConfig, RequestInterceptors } from './types'
 import * as qs from 'qs'
 import { HttpCode, HttpException, HttpStatus } from '@nestjs/common'
+import { Logger } from '../loggers/log4js'
 
 /**
  * 拦截顺序:
@@ -43,31 +44,39 @@ class Request {
     // 请求拦截器
     this.request.interceptors.request.use(
       // 全局请求拦截器
-      (res: AxiosRequestConfig) => {
+      (req: AxiosRequestConfig) => {
         // 成功
         // console.log('请求接口：', { url: res.baseURL + res.url, method: res.method })
-        return res
+        const obj = `{ "method": ${req?.method}, "url": ${req?.baseURL} + ${req?.url}, "params": ${JSON.stringify(req?.params)} }`
+        // Logger.access(obj)
+        Logger.info(obj)
+        return req
       },
-      (error: any) => error
+      (error: any) => {
+        Logger.error(error)
+        return error
+      }
     )
 
     /**
      * 实例拦截器
      */
     // 使用实例拦截器
-    this.request.interceptors.request.use(
+   /* this.request.interceptors.request.use(
       this.interceptorsObj?.requestInterceptors,
       this.interceptorsObj?.requestInterceptorsCatch
     )
     this.request.interceptors.response.use(
       this.interceptorsObj?.requestInterceptors,
       this.interceptorsObj?.requestInterceptorsCatch
-    )
+    )*/
 
     // 响应拦截器
     this.request.interceptors.response.use(
       // 因为返回的数据都在res.data下面，所以直接返回res.data
       (res: AxiosRequestConfig) => {
+        const obj = `{ "response": ${JSON.stringify(res.data)} }`
+        Logger.info(obj)
         if (res.data.state === 200) {
           return {
             code: 200,
@@ -83,6 +92,7 @@ class Request {
         }
       },
       (error: any) => {
+        Logger.error(error)
         return error
       }
     )

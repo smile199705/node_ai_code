@@ -10,7 +10,7 @@ const log4jsConfig = {
         },
         access: {
             type: 'dateFile', // 会写入文件，并按照日期分类
-            filename: 'default.log', // 日志文件名，会命名为：access.20200320.log
+            filename: `${baseLogPath}/access.log`, // 日志文件名，会命名为：default.20220920.log
             alwaysIncludePattern: true,
             pattern: 'yyyyMMdd',
             daysToKeep: 60,
@@ -25,7 +25,7 @@ const log4jsConfig = {
             layout: {
                 type: 'pattern',
                 pattern:
-                    '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}'
+                    '{"level":"%p","category":"%c","host":"%h","datetime":"%d","pid":"%z","data":\'%m\'}'
             },
             // 日志文件按日期（天）切割
             pattern: 'yyyyMMdd',
@@ -41,7 +41,7 @@ const log4jsConfig = {
             layout: {
                 type: 'pattern',
                 pattern:
-                    '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}'
+                    '{"level":"%p","category":"%c","host":"%h","datetime":"%d","pid":"%z","data":\'%m\'}'
             },
             // 日志文件按日期（天）切割
             pattern: 'yyyyMMdd',
@@ -59,7 +59,7 @@ const log4jsConfig = {
     categories: {
         default: {
             appenders: ['console', 'app', 'errors'],
-            level: 'DEBUG'
+            level: 'INFO'
         },
         info: { appenders: ['console', 'app', 'errors'], level: 'info' },
         access: { appenders: ['console', 'app', 'errors'], level: 'info' },

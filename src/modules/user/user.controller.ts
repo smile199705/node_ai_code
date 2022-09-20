@@ -8,13 +8,10 @@ export class UserController {
   constructor (
       private readonly userService: UserService,
   ) {}
-
   @Get('test')
   public async test (@Query() testDto: TestDto): Promise<any> {
     const res = await this.userService.testDemo()
-    Logger.error('测试的')
-    console.log(testDto, '^^^^^^^^')
-    console.log('res')
+    // Logger.warn('测试的')
     return res
   }
 

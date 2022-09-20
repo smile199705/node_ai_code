@@ -9,6 +9,7 @@ import * as path from 'path'
 import { MysqlModule } from './modules/data'
 import { WINSTON_MODULE_NEST_PROVIDER, WinstonModule } from 'nest-winston'
 import { Console, FileError, FileInfo } from './loggers/loggers'
+import { WinstonProvider } from './lib/winston/winston.provider'
 // import { LoggerMiddleware } from './middleware/logger.middleware'
 
 // const { combine, printf } = winston.format
@@ -45,5 +46,6 @@ import { Console, FileError, FileInfo } from './loggers/loggers'
     //   ]
     // })
   ]
+  // providers: [WinstonProvider]
 })
 export class AppModule {}
