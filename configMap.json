@@ -1,5 +1,6 @@
 {
   "env": "development",
+  "jwt_secret_key": "2022zzjrdjb",
   "db": {
     "axle": {
       "host": "rm-bp10d792y60y9fngk.mysql.rds.aliyuncs.com",

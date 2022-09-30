@@ -1,20 +1,8 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
-import { UserModule } from './modules'
+import { AuthModule, UserModule } from './modules'
 import { ConfigModule } from '@nestjs/config'
-// import { WinstonModule } from 'nest-winston'
-import * as winston from 'winston'
-import * as DailyRotateFile from 'winston-daily-rotate-file'
 import * as Joi from '@hapi/joi'
-import * as path from 'path'
 import { MysqlModule } from './modules/data'
-import { WINSTON_MODULE_NEST_PROVIDER, WinstonModule } from 'nest-winston'
-import { Console, FileError, FileInfo } from './loggers/loggers'
-import { WinstonProvider } from './lib/winston/winston.provider'
-// import { LoggerMiddleware } from './middleware/logger.middleware'
-
-// const { combine, printf } = winston.format
-// import httpContext from 'express-http-context'
-// const { clientName, serverName } = httpContext.get('context')
 
 
 @Module({
@@ -37,7 +25,8 @@ import { WinstonProvider } from './lib/winston/winston.provider'
       })
     }),
     MysqlModule,
-    UserModule
+    UserModule,
+    AuthModule
     // WinstonModule.forRoot({
     //   transports: [
     //       Console,

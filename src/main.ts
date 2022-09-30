@@ -16,6 +16,13 @@ async function bootstrap () {
     // logger: false // 使用winston代替内置logger
   })
 
+  app.enableCors({
+    origin (__origin: string, callback: any) {
+      callback(null, true)
+    },
+    credentials: true
+  })
+
   /**
    * 设置全局路由前缀
    */
