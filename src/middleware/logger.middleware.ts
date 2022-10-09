@@ -27,6 +27,7 @@ export function logger (req: Request, res: Response, next: () => any) {
     const code = res.statusCode // 响应状态码
     next()
     // 组装日志信息
+    console.log(req, '@@@@@@@@@@@@@@@@@@@@@@@@', res.statusCode, '============')
     const logFormat = `{ "url": "${req.originalUrl}", "method": "${req.method}", "ip": "${req.ip}", "header": ${JSON.stringify(req.headers)} , "params": "${JSON.stringify(req.params)}", "query": "${JSON.stringify(req.query)}", "body": "${JSON.stringify(req.body)}" }`
     // 根据状态码，进行日志类型区分
     if (code >= 500) {

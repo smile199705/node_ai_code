@@ -40,7 +40,6 @@ Log4js.addLayout('Awesome-nest', (logConfig: any) => {
         logEvent.data.forEach((value: any) => {
             if (value instanceof ContextTrace) {
                 moduleName = value.context
-                console.log(moduleName, '@@@@@@@@@@@@@@@')
                 // 显示触发日志的坐标（行，列）
                 if (value.lineNumber && value.columnNumber) {
                     position = `${value.lineNumber}, ${value.columnNumber}`

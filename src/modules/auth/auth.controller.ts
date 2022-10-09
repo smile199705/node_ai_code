@@ -40,9 +40,7 @@ export class AuthController {
 
     @Post('login')
     public async login (@Body() body): Promise<any> {
-        // console.log(body, '@@@@@@@@@@@@@')
-        // const { username, password } = body
-        // const token = tokens[username]
+        console.log(body, '$$$$$$$$$$$$$$')
         return {
             status: 200,
             token: this.jwtService.sign(body)

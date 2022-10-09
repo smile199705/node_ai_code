@@ -33,7 +33,7 @@ const users = {
   }
 }
 
-@UseGuards(AuthGuard('jwt'))
+// @UseGuards(AuthGuard('jwt'))
 @Controller('user')
 export class UserController {
   constructor (

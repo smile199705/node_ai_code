@@ -24,7 +24,7 @@ export class ValidationPipe implements PipeTransform<any> {
             let isNo
             if (errors[0].constraints) {
                 isNo = Object.keys(errors[0].constraints).join('').includes('is')
-                msg = Object.keys(errors[0]?.constraints)[0].slice(2)
+                msg = Object.keys(errors[0]?.constraints)[0].slice(2).toLocaleLowerCase()
             }
             throw new BadRequestException(isNo ? ('The type of ' + `${errors[0]?.property}` + ' should be of a ' + `${msg}`) : `${Object.values(errors[0].constraints)[0]}`)
         }
