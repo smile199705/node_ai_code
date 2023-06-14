@@ -36,7 +36,7 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
     }
     const logFormat = `{ "url": "${request.originalUrl}", "method": "${request.method}", "ip": "${request.ip}", "status": ${status}, "response": ${exception.toString()}`
     Logger.info(logFormat)
-    Logger.access(logFormat)
+    // Logger.access(logFormat)
     response.status(status).json(errorResponse)
   }
 }

@@ -48,8 +48,8 @@ class Request {
         // 成功
         // console.log('请求接口：', { url: res.baseURL + res.url, method: res.method })
         const obj = `{ "method": ${req?.method}, "url": ${req?.baseURL} + ${req?.url}, "params": ${JSON.stringify(req?.params)} }`
-        // Logger.access(obj)
-        Logger.info(obj)
+        Logger.access(obj)
+        // Logger.info(obj)
         return req
       },
       (error: any) => {
