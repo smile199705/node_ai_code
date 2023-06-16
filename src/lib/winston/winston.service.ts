@@ -92,7 +92,7 @@ export class WinstonService {
          * @loggerObject 最终的 "logger" 日志对象
          */
     	this.logger = winston.createLogger(expressWinston.logger({
-    		defaultMeta: { service: 'node-axle' },
+    		defaultMeta: { service: 'axlejs_ai_code' },
     		format: combine(
     			customFormat
     		),
