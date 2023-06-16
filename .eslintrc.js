@@ -37,7 +37,7 @@ module.exports = {
     /**
      * 禁止混用tab和空格.
      */
-    'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+    // 'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
 
     /**
      * 强制不使用分号.
