@@ -17,18 +17,18 @@ export class HttpExceptionFilter implements ExceptionFilter<Error> {
    * @param host 主机
    */
 	public catch (exception: Error, host: ArgumentsHost) {
-		const ctx = host.switchToHttp()
-		const response = ctx.getResponse<Response>()
+		const ctx = host.switchToHttp() // 获取请求上下文
+		const response = ctx.getResponse<Response>() // 获取请求上下文中的response对象
 		const request = ctx.getRequest<Request>()
-		const status =
-      exception instanceof HttpException ?
-      	exception.getStatus() :
-      	HttpStatus.INTERNAL_SERVER_ERROR
+		// 获取异常状态码
+		const status = exception instanceof HttpException ?
+			exception.getStatus() :
+			HttpStatus.INTERNAL_SERVER_ERROR
 
 		const nowDate = moment().format('YYYY-MM-DD HH:mm:ss')
 		const errorResponse = {
 			state: status,
-			msg: exception.name,
+			msg: exception.message ? exception.message : `${status >= 500 ? 'Service Error' : 'Client Error'}`,
 			data: {
 				path: request.url,
 				date: nowDate,

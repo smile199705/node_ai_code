@@ -28,11 +28,9 @@ async function bootstrap () {
    * 设置全局路由前缀
    */
 	app.setGlobalPrefix(`${process.env.NODE_ENV}/axle`)
-	// app.setGlobalPrefix('axle')
 
 	// 设置全局参数管道
 	app.useGlobalPipes(new ValidationPipe())
-
 	// 日志中间件
 	// app.use(new LoggerMiddleware(Logger).use)
 

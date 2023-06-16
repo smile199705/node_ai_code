@@ -15,7 +15,8 @@ nconf.argv().env().file({ file: 'configMap.json' })
 			username: nconf.get('db:axle:username'),
 			password: nconf.get('db:axle:password'),
 			database: 'axle',
-			autoLoadEntities: true
+			autoLoadEntities: true,
+			synchronize: false
 		})
 	]
 })
