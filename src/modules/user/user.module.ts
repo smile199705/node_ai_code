@@ -7,7 +7,7 @@ import { WinstonService } from '../../lib/winston/winston.service'
 import { Logger } from '../../lib/winston/logger'
 
 @Module({
-  controllers: [UserController],
-  providers: [UserService, Logger]
+	controllers: [UserController],
+	providers: [UserService, Logger]
 })
 export class UserModule {}

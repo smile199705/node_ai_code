@@ -7,17 +7,17 @@ import { jwtKey } from '../../config/constant'
 import { PassportModule } from '@nestjs/passport'
 
 @Module({
-  imports: [
-      PassportModule.register({ defaultStrategy: 'jwt' }),
-      JwtModule.register({
-        // 生成token的key
-        secret: jwtKey.secret,
-        signOptions: {
-            expiresIn: '5m'
-        }
-      })
-  ],
-  providers: [AuthService, JwtStrategy],
-  controllers: [AuthController]
+	imports: [
+		PassportModule.register({ defaultStrategy: 'jwt' }),
+		JwtModule.register({
+			// 生成token的key
+			secret: jwtKey.secret,
+			signOptions: {
+				expiresIn: '5m'
+			}
+		})
+	],
+	providers: [AuthService, JwtStrategy],
+	controllers: [AuthController]
 })
 export class AuthModule {}

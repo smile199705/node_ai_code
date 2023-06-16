@@ -1,3 +1,3 @@
 export const jwtKey = {
-    secret: '2022zzjrdjb'
+	secret: '2022zzjrdjb'
 }

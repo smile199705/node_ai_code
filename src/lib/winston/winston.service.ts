@@ -23,104 +23,104 @@ export class WinstonService {
     // private logger
     private logger: winston.Logger
     constructor () {
-        // this.formatContent = options.formatContent
-        // const loggerConfig = Object.assign(CONFIG, option)
-        // const loggerConfig = Object.assign(WinstonConfig, options)
-        const { loggerPath, maxSize, level, blankSpace, desFields, shorten } = CONFIG
-        this.desFields = desFields
-        this.shortenFields = shorten
-        // if (!serverName) {
-        //     throw new Error(`当前系统的名称 serverName:${serverName} 不能为空!`)
-        // }
+    	// this.formatContent = options.formatContent
+    	// const loggerConfig = Object.assign(CONFIG, option)
+    	// const loggerConfig = Object.assign(WinstonConfig, options)
+    	const { loggerPath, maxSize, level, blankSpace, desFields, shorten } = CONFIG
+    	this.desFields = desFields
+    	this.shortenFields = shorten
+    	// if (!serverName) {
+    	//     throw new Error(`当前系统的名称 serverName:${serverName} 不能为空!`)
+    	// }
 
-        /**
+    	/**
          * @defaultLog 设置默认的日志输出
          */
-        const transportDefault = new DailyRotateFile({
-            level,
-            filename: path.join(loggerPath, '/default-%DATE%.log'),
-            datePattern: 'YYYY-MM-DD',
-            zippedArchive: true,
-            createSymlink: true,
-            symlinkName: 'default.log',
-            maxSize
-            // maxFiles: '30d'
-        })
+    	const transportDefault = new DailyRotateFile({
+    		level,
+    		filename: path.join(loggerPath, '/default-%DATE%.log'),
+    		datePattern: 'YYYY-MM-DD',
+    		zippedArchive: true,
+    		createSymlink: true,
+    		symlinkName: 'default.log',
+    		maxSize
+    		// maxFiles: '30d'
+    	})
 
-        /**
+    	/**
          * @errorLog 设置error类型的日志输出
          */
-        const transportError = new DailyRotateFile({
-            level: 'error',
-            filename: path.join(loggerPath, '/error-%DATE%.log'),
-            datePattern: 'YYYY-MM-DD',
-            zippedArchive: true,
-            createSymlink: true,
-            symlinkName: 'error.log',
-            maxSize
-            // maxFiles: '30d'
-        })
+    	const transportError = new DailyRotateFile({
+    		level: 'error',
+    		filename: path.join(loggerPath, '/error-%DATE%.log'),
+    		datePattern: 'YYYY-MM-DD',
+    		zippedArchive: true,
+    		createSymlink: true,
+    		symlinkName: 'error.log',
+    		maxSize
+    		// maxFiles: '30d'
+    	})
 
-        /**
+    	/**
          * @customFormat 自定义输出日志格式
          */
-        const customFormat = printf((info) => {
-            const { level: customLevel, message } = info
-            const logObj = {
-                level: customLevel,
-                ...message
-            }
+    	const customFormat = printf((info) => {
+    		const { level: customLevel, message } = info
+    		const logObj = {
+    			level: customLevel,
+    			...message
+    		}
 
-            let content = JSON.stringify(logObj)
-            if (this.shortenFields.length > 0) {
-                // @ts-ignore
-                content = this[shorten](content)
-            }
-            if (this.desFields.length > 0) {
-                content = this[desensitize](content)
-            }
+    		let content = JSON.stringify(logObj)
+    		if (this.shortenFields.length > 0) {
+    			// @ts-ignore
+    			content = this[shorten](content)
+    		}
+    		if (this.desFields.length > 0) {
+    			content = this[desensitize](content)
+    		}
 
-            // 如blankSpace为true,则日志的输出格式为隔行输出
-            if (blankSpace) {
-                return content + '\n'
-            }
+    		// 如blankSpace为true,则日志的输出格式为隔行输出
+    		if (blankSpace) {
+    			return content + '\n'
+    		}
 
-            return content
-        })
+    		return content
+    	})
 
-        /**
+    	/**
          * @loggerObject 最终的 "logger" 日志对象
          */
-        this.logger = winston.createLogger(expressWinston.logger({
-            defaultMeta: { service: 'node-axle' },
-            format: combine(
-                customFormat
-            ),
-            transports: [transportDefault, transportError, new transports.Console()]
-        }))
+    	this.logger = winston.createLogger(expressWinston.logger({
+    		defaultMeta: { service: 'node-axle' },
+    		format: combine(
+    			customFormat
+    		),
+    		transports: [transportDefault, transportError, new transports.Console()]
+    	}))
     }
 
     // debug
     public debug (content, e): void {
-        // const cont = this[composeProcess](content, e)
-        this.logger.debug(content, e)
+    	// const cont = this[composeProcess](content, e)
+    	this.logger.debug(content, e)
     }
 
     // info
     public info (content): void {
-        // const cont = this[composeProcess](content, e)
-        this.logger.info(content)
+    	// const cont = this[composeProcess](content, e)
+    	this.logger.info(content)
     }
 
     // warn
     public warn (content, e): void {
-        // const cont = this[composeProcess](content, e)
-        this.logger.warn(content, e)
+    	// const cont = this[composeProcess](content, e)
+    	this.logger.warn(content, e)
     }
 
     // error
     public error (content, e): void {
-        // const cont = this[composeProcess](content, e)
-        this.logger.error(content, e)
+    	// const cont = this[composeProcess](content, e)
+    	this.logger.error(content, e)
     }
 }

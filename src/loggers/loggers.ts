@@ -16,63 +16,63 @@ const levelArr = ['info', 'warn', 'error', 'debug']
 
 // @ts-ignore
 const Printf = winston.format.printf(info => {
-    info.timestamp = moment().format('YYYY-MM-DD HH:mm:ss.SSS')
-    return JSON.stringify(info)
+	info.timestamp = moment().format('YYYY-MM-DD HH:mm:ss.SSS')
+	return JSON.stringify(info)
 })
 // 控制台打印
 export const Console = new winston.transports.Console({
-    format: combine(
-        timestamp({
-            format: moment().format('YYYY-MM-DD HH:mm:ss.SSS')
-        }),
-        Printf,
-        colorize({
-            colors: {
-                error: 'red',
-                info: 'green',
-                warn: 'yellow'
-            }
+	format: combine(
+		timestamp({
+			format: moment().format('YYYY-MM-DD HH:mm:ss.SSS')
+		}),
+		Printf,
+		colorize({
+			colors: {
+				error: 'red',
+				info: 'green',
+				warn: 'yellow'
+			}
 
-        }),
-        json(),
-        nestWinstonModuleUtilities.format.nestLike('axle', {
-        })
-    )
+		}),
+		json(),
+		nestWinstonModuleUtilities.format.nestLike('axle', {
+		})
+	)
 })
 // 所有类型文件
 export const FileInfo = new DailyRotateFile({
-    level,
-    filename: path.join(loggerPath, '/default-%DATE%.log'),
-    format: combine(
-        colorize({
-            colors: {
-                error: 'red',
-                info: 'green',
-                warn: 'yellow'
-            }
-        }),
-        json(),
-        Printf
-    ),
-    datePattern: 'YYYY-MM-DD',
-    zippedArchive: true,
-    createSymlink: true,
-    symlinkName: 'default.log',
-    maxSize: maxSize
+	level,
+	filename: path.join(loggerPath, '/default-%DATE%.log'),
+	format: combine(
+		colorize({
+			colors: {
+				error: 'red',
+				info: 'green',
+				warn: 'yellow'
+			}
+		}),
+		json(),
+		Printf
+	),
+	datePattern: 'YYYY-MM-DD',
+	zippedArchive: true,
+	createSymlink: true,
+	symlinkName: 'default.log',
+	maxSize: maxSize
 })
 // error类型文件
 export const FileError = new DailyRotateFile({
-    level: 'error',
-    filename: path.join(loggerPath, '/error-%DATE%.log'),
-    datePattern: 'YYYY-MM-DD',
-    format: combine(
-        json(),
-        Printf
-    ),
-    zippedArchive: true,
-    createSymlink: true,
-    symlinkName: 'error.log',
-    maxSize: '200m'
+	level: 'error',
+	filename: path.join(loggerPath, '/error-%DATE%.log'),
+	datePattern: 'YYYY-MM-DD',
+	format: combine(
+		json(),
+		Printf
+	),
+	zippedArchive: true,
+	createSymlink: true,
+	symlinkName: 'error.log',
+	maxSize: '200m'
 })
 
 // export const logger = createLogger({

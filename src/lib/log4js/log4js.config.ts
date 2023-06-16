@@ -1,4 +1,5 @@
 export interface Log4jsConfig {
+
     /**
      * 日志存放路径
      * @default "logs/http"
